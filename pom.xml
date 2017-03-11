@@ -16,10 +16,14 @@
   </licenses>
   <build>
     <sourceDirectory>src</sourceDirectory>
+
     <resources>
-    <resource>
-    <directory>src</directory>
-    </resource>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
     </resources>
     <defaultGoal>package</defaultGoal>
     <finalName>cue.language</finalName>

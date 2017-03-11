@@ -20,3 +20,12 @@ desc 'Compile'
 task :compile do
   sh 'mvn package'
 end
+
+desc 'clean'
+task :clean do
+  Dir['./**/*.%w{jar}'].each do |path|
+    puts 'Deleting #{path} ...'
+    File.delete(path)
+  end
+  FileUtils.rm_rf('./target')
+end

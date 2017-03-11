@@ -22,11 +22,13 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
           <configuration>
             <archive>
-              <manifestFile>MANIFEST.MF</manifestFile>
+              <manifestEntries>
+                <Built-By>monkstone</Built-By>
+              </manifestEntries>
             </archive>
           </configuration>
         </plugin>

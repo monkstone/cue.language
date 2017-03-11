@@ -12,11 +12,15 @@
     <license>
       <name>Apache License, Version 2.0</name>
       <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
     </license>
   </licenses>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <resources>
+    <resource>
+    <directory>src</directory>
+    </resource>
+    </resources>
     <defaultGoal>package</defaultGoal>
     <finalName>cue.language</finalName>
     <pluginManagement>

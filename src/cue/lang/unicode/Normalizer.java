@@ -50,6 +50,6 @@ public abstract class Normalizer {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Normalizer.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return "cue.lang.unicode.Normalizer8";        
+            return "cue.lang.unicode.Normalizer6";        
     }
 }

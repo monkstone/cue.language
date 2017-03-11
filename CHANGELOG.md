@@ -1,0 +1,1 @@
+v2.0.0 Long overdue update to jdk8 and maven build, Martin Prout made all these changes apart from C. Fuhrman addition to French stop words. Also removed binary code because it is kind of pointless to support java-1.5. Pretty well all of other code changes are to take advantage of jdk8 features, well apart the change to maven build (from Eclipse project).

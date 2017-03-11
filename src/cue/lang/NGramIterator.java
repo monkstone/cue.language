@@ -89,10 +89,12 @@ public class NGramIterator extends IterableText {
 		loadNext();
 	}
 
+        @Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
 
+        @Override
 	public String next() {
 		if (next == null) {
 			throw new NoSuchElementException();
@@ -102,6 +104,7 @@ public class NGramIterator extends IterableText {
 		return result;
 	}
 
+        @Override
 	public boolean hasNext() {
 		return next != null;
 	}

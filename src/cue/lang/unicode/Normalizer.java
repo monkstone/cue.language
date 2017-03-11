@@ -15,34 +15,41 @@
  */
 package cue.lang.unicode;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * 
+ *
  * @author Jonathan Feinberg <jdf@us.ibm.com>
- * 
+ *
  */
 public abstract class Normalizer {
-	public static Normalizer getInstance() {
-		return INSTANCE;
-	}
 
-	abstract public String normalize(final String s);
+    public static Normalizer getInstance() {
+        return INSTANCE;
+    }
 
-	private static final Normalizer INSTANCE;
-	static {
-		try {
-			INSTANCE = (Normalizer) Class.forName(getNormalizerClass())
-					.getConstructor().newInstance();
-		} catch (final Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    abstract public String normalize(final String s);
 
-	private static String getNormalizerClass() {
-		try {
-			Class.forName("java.text.Normalizer");
-			return "cue.lang.unicode.Normalizer6";
-		} catch (final Exception e) {
-			return "cue.lang.unicode.Normalizer5";
-		}
-	}
+    private static final Normalizer INSTANCE;
+
+    static {
+        try {
+            INSTANCE = (Normalizer) Class.forName(getNormalizerClass())
+                    .getConstructor().newInstance();
+        } catch (final ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String getNormalizerClass() {
+
+        try {
+            Class.forName("java.text.Normalizer");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Normalizer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return "cue.lang.unicode.Normalizer8";        
+    }
 }

@@ -47,7 +47,7 @@ public class BlockUtil {
 	}
 
 	public static UnicodeBlock guessUnicodeBlock(final String text) {
-		return guessUnicodeBlock(new Counter<String>(new WordIterator(text)));
+		return guessUnicodeBlock(new Counter<>(new WordIterator(text)));
 	}
 
 	public static UnicodeBlock guessUnicodeBlock(
@@ -68,7 +68,7 @@ public class BlockUtil {
 	public static UnicodeBlock guessUnicodeBlock(final Collection<String> words) {
 		boolean hasExtendedLatin = false;
 		boolean hasHyperextendedLatin = false;
-		final Counter<UnicodeBlock> counter = new Counter<UnicodeBlock>();
+		final Counter<UnicodeBlock> counter = new Counter<>();
 		for (final String word : words) {
 			final UnicodeBlock block = getBlock(word);
 			if (block == UnicodeBlock.LATIN_1_SUPPLEMENT) {
@@ -80,7 +80,7 @@ public class BlockUtil {
 			counter.note(block);
 		}
 		final List<UnicodeBlock> mostFrequent = counter.getMostFrequent(1);
-		if (mostFrequent.size() == 0) {
+		if (mostFrequent.isEmpty()) {
 			return null;
 		}
 		UnicodeBlock b = mostFrequent.get(0);

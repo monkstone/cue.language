@@ -38,10 +38,12 @@ public class WordIterator extends IterableText {
         hasNext = m.find();
     }
 
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public String next() {
         if (!hasNext) {
             throw new NoSuchElementException();
@@ -51,6 +53,7 @@ public class WordIterator extends IterableText {
         return s;
     }
 
+    @Override
     public boolean hasNext() {
         return hasNext;
     }

@@ -34,7 +34,7 @@ public class SentenceIterator extends IterableText {
 	int start, end;
 
 	/**
-	 * Uses the default {@link Locale} for the running isnatnce of the JVM.
+	 * Uses the default {@link Locale} for the running instance of the JVM.
 	 * 
 	 * @param text
 	 */
@@ -62,10 +62,12 @@ public class SentenceIterator extends IterableText {
 		}
 	}
 
+        @Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
 
+        @Override
 	public String next() {
 		if (!hasNext()) {
 			throw new NoSuchElementException();
@@ -76,6 +78,7 @@ public class SentenceIterator extends IterableText {
 		return result;
 	}
 
+        @Override
 	public final boolean hasNext() {
 		return end != BreakIterator.DONE;
 	}

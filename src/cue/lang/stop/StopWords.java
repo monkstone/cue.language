@@ -43,7 +43,7 @@ public enum StopWords {
     Swedish(), Hebrew(), Turkish(), Custom();
 
     public static StopWords guess(final String text) {
-        return guess(new Counter<String>(new WordIterator(text)));
+        return guess(new Counter<>(new WordIterator(text)));
     }
 
     public static StopWords guess(final Counter<String> wordCounter) {
@@ -55,11 +55,7 @@ public enum StopWords {
         int currentMax = 0;
         for (final StopWords stopWords : StopWords.values()) {
             int count = 0;
-            for (final String word : words) {
-                if (stopWords.isStopWord(word)) {
-                    count++;
-                }
-            }
+            count = words.stream().filter((word) -> (stopWords.isStopWord(word))).map((_item) -> 1).reduce(count, Integer::sum);
             if (count > currentMax) {
                 currentWinner = stopWords;
                 currentMax = count;
@@ -69,7 +65,7 @@ public enum StopWords {
     }
 
     public final boolean stripApostrophes;
-    private final Set<String> stopwords = new HashSet<String>();
+    private final Set<String> stopwords = new HashSet<>();
 
     private StopWords() {
         this(false);
@@ -98,9 +94,8 @@ public enum StopWords {
 
     public void readStopWords(final InputStream inputStream, final Charset encoding) {
         try {
-            final BufferedReader in = new BufferedReader(new InputStreamReader(inputStream,
-                    encoding));
-            try {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream,
+                    encoding))) {
                 String line;
                 while ((line = in.readLine()) != null) {
                     line = line.replaceAll("\\|.*", "").trim();
@@ -111,8 +106,6 @@ public enum StopWords {
                         stopwords.add(w.toLowerCase(Locale.ENGLISH));
                     }
                 }
-            } finally {
-                in.close();
             }
         } catch (final IOException e) {
             throw new RuntimeException(e);

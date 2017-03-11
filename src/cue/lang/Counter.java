@@ -28,6 +28,7 @@ import java.util.Set;
 /**
  * 
  * @author Jonathan Feinberg <jdf@us.ibm.com>
+ * @param <T>
  * 
  */
 public class Counter<T> {
@@ -36,13 +37,27 @@ public class Counter<T> {
 	private int totalItemCount = 0;
 
 	public Counter() {
+        this.BY_FREQ_DESC = new Comparator<Entry<T, Integer>>() {
+            @Override
+            public int compare(final Entry<T, Integer> o1,
+                    final Entry<T, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        };
 	}
 
 	public Counter(final Iterable<T> items) {
+        this.BY_FREQ_DESC = new Comparator<Entry<T, Integer>>() {
+            @Override
+            public int compare(final Entry<T, Integer> o1,
+                    final Entry<T, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        };
 		noteAll(items);
 	}
 
-	public void noteAll(final Iterable<T> items) {
+	public final void noteAll(final Iterable<T> items) {
 		for (final T t : items) {
 			note(t, 1);
 		}
@@ -72,12 +87,7 @@ public class Counter<T> {
 		return totalItemCount;
 	}
 
-	private final Comparator<Entry<T, Integer>> BY_FREQ_DESC = new Comparator<Entry<T, Integer>>() {
-		public int compare(final Entry<T, Integer> o1,
-				final Entry<T, Integer> o2) {
-			return o2.getValue() - o1.getValue();
-		}
-	};
+	private final Comparator<Entry<T, Integer>> BY_FREQ_DESC;
 
 	/**
 	 * @param n

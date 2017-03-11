@@ -1,2 +1,6 @@
 bin
+*~
+*.jar
+/tmp/
+/target/
 
